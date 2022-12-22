@@ -1,11 +1,9 @@
 import { Request, Response } from 'express'
-import IUser from '../models/users/IUser.js'
+import IUser from '../models/users/IUser'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
-import { authUser } from '../services/AuthService.js'
-
-dotenv.config()
+import { authUser } from '../services/AuthService'
 
 export const authUserCredentials = async (req: Request, res: Response) => {
   const { email, password } = req.query

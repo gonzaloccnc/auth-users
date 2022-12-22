@@ -1,5 +1,5 @@
 import { Request, Response, response } from 'express'
-import { createNote, findAllNotes } from '../services/NoteService.js'
+import { createNote, findAllNotes } from '../services/NoteService'
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
 

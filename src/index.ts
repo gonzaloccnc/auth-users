@@ -1,10 +1,10 @@
 import 'dotenv/config'
 import express from 'express'
-import cnx from './config/mongoose.js'
-import userRouter from './routes/user/User.js'
+import cnx from './config/mongoose'
+import userRouter from './routes/user/User'
 import cors from 'cors'
-import noteRouter from './routes/note/NoteRoute.js'
-import authRouter from './routes/auth/AuthRoute.js'
+import noteRouter from './routes/note/NoteRoute'
+import authRouter from './routes/auth/AuthRoute'
 
 const app = express()
 const PORT = process.env.PORT || 3000

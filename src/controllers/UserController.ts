@@ -1,7 +1,7 @@
-import { findAllUsers } from '../services/UserService.js'
+import { findAllUsers } from '../services/UserService'
 import { Request, Response } from 'express'
-import IUser from '../models/users/IUser.js'
-import User from '../models/users/User.js'
+import IUser from '../models/users/IUser'
+import User from '../models/users/User'
 import bcrypt from 'bcrypt'
 
 /* bad returned users if only is for auth */
