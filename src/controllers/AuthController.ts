@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import IUser from '../models/users/IUser'
+import IUser from '../models/users/IUser.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
-import { authUser } from '../services/AuthService'
+import 'dotenv/config'
+import { authUser } from '../services/AuthService.js'
 
 dotenv.config()
 

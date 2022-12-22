@@ -1,9 +1,7 @@
 import { Request, Response, response } from 'express'
-import { createNote, findAllNotes } from '../services/NoteService'
+import { createNote, findAllNotes } from '../services/NoteService.js'
 import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
-
-dotenv.config()
+import 'dotenv/config'
 
 export const getNotes = async (req: Request, res: Response) => {
   try {
