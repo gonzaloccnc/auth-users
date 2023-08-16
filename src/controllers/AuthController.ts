@@ -1,37 +1,59 @@
-import { Request, Response } from 'express'
-import IUser from '../models/users/IUser'
+import 'dotenv/config'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import 'dotenv/config'
 import { authUser } from '../services/AuthService'
+import { Data, Handler } from '../utils/ServerPayloads'
 
-export const authUserCredentials = async (req: Request, res: Response) => {
-  const { email, password } = req.query
+interface Credentials {
+  email: string
+  password: string
+}
+
+interface AuthJson {
+  email: string
+  token: string
+}
+
+export const authUserCredentials: Handler<Credentials, Data<AuthJson>> = async (req, res) => {
+  const timeExp = 60 * 60 * 24 * 15
+  const { email, password } = req.body
 
   try {
-    const user: IUser | null = await authUser(email as string)
+    const user = await authUser(email as string)
     const passwordCorrect = user === null
       ? false
       : await bcrypt.compare(password as string, user.password)
 
     if (!(user && passwordCorrect)) {
-      res.status(401).json({ error: 'invalid user or password' })
+      res.status(401).json({ data: null, error: 'invalid user or password', status: 401 })
     } else {
-      const userToken = {
+      const claims = {
         id: user.id,
-        email: user.email,
+        sub: user.email,
         name: user.name,
-        avatar: user.avatar || null
+        iat: new Date(Date.now()).getTime() / 1000,
+        exp: (new Date(Date.now()).getTime() / 1000) + timeExp,
+        avatar: user.avatar
       }
 
-      const token = jwt.sign(userToken, process.env.SECRET_WORD as string)
+      const token = jwt.sign(claims, process.env.SECRET_WORD)
 
       res.json({
-        email: user.email,
-        token
+        data: {
+          email: user.email,
+          token
+        },
+        error: null,
+        status: 200
       })
     }
   } catch (err) {
-    if (err instanceof Error) res.status(500).json({ message: err.message })
+    if (err instanceof Error) {
+      res.status(500).json({
+        error: err.message,
+        data: null,
+        status: 500
+      })
+    }
   }
 }

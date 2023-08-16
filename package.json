@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts",
+    "dev:watch": "nodemon --exec ts-node --files src/index.ts",
+    "dev:start": "ts-node --files src/index.ts",
     "format": "prettier --write ./src",
     "lint": "eslint --fix ./src --ext .ts",
     "out": "tsc"
@@ -29,14 +30,17 @@
     "@types/jsonwebtoken": "8.5.9",
     "@types/mongoose": "5.11.97",
     "@types/multer": "1.4.7",
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
-    "eslint": "^8.26.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.4.0",
-    "eslint-plugin-promise": "^6.1.1",
+    "@types/node": "20.4.9",
+    "@typescript-eslint/eslint-plugin": "5.42.0",
+    "@typescript-eslint/parser": "5.42.0",
+    "eslint": "8.26.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.4.0",
+    "eslint-plugin-promise": "6.1.1",
+    "nodemon": "3.0.1",
     "prettier": "2.7.1",
-    "ts-node-dev": "2.0.0"
+    "ts-node": "10.9.1",
+    "typescript": "5.1.6"
   }
 }
